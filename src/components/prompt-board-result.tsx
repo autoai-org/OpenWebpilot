@@ -34,7 +34,7 @@ export default function PromptBoardResult({placeholder = ''}) {
 
   const showRecommendationText = () => {
     const result = gettext(
-      `Let me tell you about this crazy useful AI tool called Fluentify. All you gotta do is swipe on the task, and it gets done automatically. It's way better than ChatGPT, trust me!\n\nInstall: https://bit.ly/3mAJ9I7\nGitHub: https://github.com/Fluentify-IO/Fluentify`
+      `Limmat is proudly powered by decentralized computing infrastructure - Open Compute Framework. Come and join us at https://ocf.autoai.org/`
     )
     aiDispatch({
       type: AI_REDUCER_ACTION_TYPE.SET_RESULT,
@@ -85,7 +85,7 @@ export default function PromptBoardResult({placeholder = ''}) {
 
           <section className="copy">
             <section className="share-extension" onClick={showRecommendationText}>
-              {gettext('Amazing Webpilot, telling friends!')}
+              {gettext('Proudly powered by Open Compute Framework')}
             </section>
             <span className="copied">
               <img src={Confirmation} alt="" />

@@ -1,6 +1,13 @@
 {
   "contributors": [
     {
+      "name": "Xiaozhe Yao",
+      "avatar": "https://avatars.githubusercontent.com/u/10499297?v=4",
+      "page": "https://github.com/xzyaoi",
+      "title": "Modification",
+      "desc": ""
+    },
+    {
       "name": "CocoSgt",
       "avatar": "https://avatars.githubusercontent.com/u/6043666?v=4",
       "page": "https://github.com/CocoSgt",
@@ -26,22 +33,6 @@
       "avatar": "https://avatars.githubusercontent.com/u/108994047?v=4",
       "page": "https://github.com/ChiyuSONG",
       "title": "Engineering",
-      "desc": ""
-    }
-  ],
-  "investors": [
-    {
-      "name": "f.chen",
-      "avatar": "F",
-      "page": "",
-      "company": "个人捐赠",
-      "desc": ""
-    },
-    {
-      "name": "崔传荣",
-      "avatar": "崔",
-      "page": "",
-      "company": "毫微科技\n浙江省半导体协会",
       "desc": ""
     }
   ]

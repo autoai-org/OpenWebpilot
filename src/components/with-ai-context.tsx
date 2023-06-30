@@ -47,7 +47,7 @@ export function withAIContext(Component) {
       aiDispatch({type: AI_REDUCER_ACTION_TYPE.REQUEST})
 
       // due to ChatGPT3.5 max token limit, srhink all content to 3600 token.
-      let prompt = onlyCommand ? command : `${command}:\n\n${selectedText}\n\n`
+      const prompt = onlyCommand ? command : `${command}:\n\n${selectedText}\n\n`
 
       return askOCF({
         authKey: authKey || config.authKey,
@@ -55,7 +55,7 @@ export function withAIContext(Component) {
         prompt,
       })
         .then(reply => {
-            aiDispatch({type: AI_REDUCER_ACTION_TYPE.SUCCESS, payload: {result: reply.text}})
+          aiDispatch({type: AI_REDUCER_ACTION_TYPE.SUCCESS, payload: {result: reply.text}})
         })
         .catch(err => {
           if (err instanceof DOMException && /aborted/.test(err.message)) {

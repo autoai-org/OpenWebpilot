@@ -2,5 +2,3 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 PATH="${PATH}:/usr/local/bin:/opt/homebrew/bin"
-
-pnpm lint
