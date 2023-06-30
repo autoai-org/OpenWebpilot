@@ -47,35 +47,6 @@ export default function EntryPanel() {
         />
       </section>
 
-      {ai.loading ? null : (
-        <section>
-          <div className="tips">
-            {gettext('You can find your auth key on the OpenAI website:')}{' '}
-            <a
-              className="link"
-              href="https://platform.openai.com/account/api-keys"
-              target="_blank"
-              rel="noreferrer"
-            >
-              https://platform.openai.com/account/api-keys
-            </a>
-            <div>{gettext('You can also follow the instructions below to get started:')}</div>
-          </div>
-
-          {ai.loading ? (
-            <div className="loader-container">
-              <span className="loader" />
-            </div>
-          ) : (
-            <div className="guide">
-              <a href={getAuthKeyImage} target="_blank" rel="noreferrer">
-                <img src={getAuthKeyImage} />
-              </a>
-            </div>
-          )}
-        </section>
-      )}
-
       <style jsx>{styles}</style>
       <style jsx>{globalStyles}</style>
     </section>

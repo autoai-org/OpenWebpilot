@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react'
 import {createRoot} from 'react-dom/client'
 
-import {askOpenAI} from '@/io'
+import {askOCF} from '@/io'
 import useConfig from '@/hooks/use-config'
 
 export const config = {
@@ -35,7 +35,7 @@ export default function InjectButton() {
     const {value} = getTextarea()
     setLoading(true)
 
-    askOpenAI({authKey, model, prompt: value})
+    askOCF({authKey, model, prompt: value})
       .then(res => {
         const $textarea = getTextarea()
         if (res) {

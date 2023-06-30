@@ -1,6 +1,7 @@
 import {gettext} from './utils'
 
 export const OPEN_AI_API = 'https://api.openai.com/v1/chat/completions'
+export const OCF_API = 'https://inference.autoai.dev/api/v1/request/inference'
 
 export const FLUENTIFY_CONFIG_STORAGE_KEY = 'FLUENTIFY_CONFIG'
 
@@ -46,7 +47,7 @@ export const defaultConfig = {
   ] as Prompt[],
 
   model: {
-    model: 'gpt-3.5-turbo',
+    model: 'mosaicml/mpt-7b-chat',
     temperature: 1,
     top_p: 0.9,
     frequency_penalty: 0,

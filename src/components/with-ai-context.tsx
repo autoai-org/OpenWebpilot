@@ -1,8 +1,7 @@
 import {createContext, useReducer} from 'react'
 import {sendToContentScript} from '@plasmohq/messaging'
-import {encode, decode} from 'gpt-3-encoder'
 
-import {askOpenAI, parseStream} from '@/io'
+import {askOCF, parseStream} from '@/io'
 import {gettext, toast} from '@/utils'
 import {MESSAGING_EVENT, ROUTE} from '@/config'
 
@@ -50,18 +49,13 @@ export function withAIContext(Component) {
       // due to ChatGPT3.5 max token limit, srhink all content to 3600 token.
       let prompt = onlyCommand ? command : `${command}:\n\n${selectedText}\n\n`
 
-      const encoded = encode(prompt)
-      if (encoded.length > 3600) prompt = decode(encoded.slice(0, 3600))
-
-      return askOpenAI({
+      return askOCF({
         authKey: authKey || config.authKey,
         model: config.model,
         prompt,
       })
-        .then(streamReader => {
-          return parseStream(streamReader, result => {
-            aiDispatch({type: AI_REDUCER_ACTION_TYPE.SUCCESS, payload: {result}})
-          })
+        .then(reply => {
+            aiDispatch({type: AI_REDUCER_ACTION_TYPE.SUCCESS, payload: {result: reply.text}})
         })
         .catch(err => {
           if (err instanceof DOMException && /aborted/.test(err.message)) {

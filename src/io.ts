@@ -1,11 +1,12 @@
-import {OPEN_AI_API} from '@/config'
+import {OCF_API} from '@/config'
 
 let prevAbortController = null
 
-export async function askOpenAI({authKey, model, prompt}) {
+export async function askOCF({authKey, model, prompt}) {
   model.messages = [{role: 'user', content: prompt}]
   model.stream = true
-
+  let chatml_prompt = "<|im_start|>system\nA conversation between a user and an LLM-based AI assistant. The assistant gives helpful and honest answers.<|im_end|>\n"
+  chatml_prompt += "<|im_start|>user\n" + prompt + "<|im_end|>\n<|im_start|>assistant\n"
   const abortController = new AbortController()
 
   if (prevAbortController) {
@@ -14,31 +15,37 @@ export async function askOpenAI({authKey, model, prompt}) {
 
   prevAbortController = abortController
 
-  return fetch(OPEN_AI_API, {
+  return fetch(OCF_API, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${authKey}`,
+      // ignored for now
+      // Authorization: `Bearer ${authKey}`,
     },
-    body: JSON.stringify(model),
+    body: JSON.stringify({
+      "model_name": model.model,
+      "params": {
+        "prompt": chatml_prompt,
+        "temperature": model.temperature,
+        "top_p": model.top_p,
+      }
+    }),
     signal: abortController.signal,
   }).then(async response => {
-    const streamReader = response.body.getReader()
-
-    if (!response.ok) {
-      const decoder = new TextDecoder()
-      const {value} = await streamReader.read()
-      const text = decoder.decode(value, {stream: true})
-
+    if (response.ok) {
       try {
-        response.data = JSON.parse(text)
-      } catch (e) {}
-
+        let data = await response.json()
+        data = JSON.parse(data['data'])['output']
+        data['text'] = data['text'].replace(chatml_prompt, '')
+        // split by <|im_end|> and take the first one
+        data['text'] = data['text'].split('<|im_end|>')[0]
+        return data
+      } catch (e) {
+        console.log(e)
+      }
       // eslint-disable-next-line prefer-promise-reject-errors
       return Promise.reject({response})
     }
-
-    return streamReader
   })
 }
 
