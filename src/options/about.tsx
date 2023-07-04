@@ -4,7 +4,7 @@ import {useState, useEffect} from 'react'
 import {gettext} from '@/utils'
 
 import Contributor from './contributor'
-const ABOUT_API = 'https://raw.githubusercontent.com/webpilot-ai/data/main/about.json'
+const ABOUT_API = 'https://raw.githubusercontent.com/autoai-org/OpenWebpilot/main/assets/about.json'
 
 export default function About() {
   const [about, setAbout] = useState({})
@@ -13,7 +13,7 @@ export default function About() {
       .then(res => res.json())
       .then(setAbout)
   }, [])
-  const {contributors = [], sponsors = [], donate = {}} = about
+  const {contributors = [], sponsors = []} = about
   return (
     <section className="about">
       <div className="contributors">
@@ -36,12 +36,6 @@ export default function About() {
             return <Contributor key={index} info={info} />
           })}
         </div>
-      </div>
-
-      <div className="donate">
-        <a href={donate.link} target="_black">
-          {donate.text}
-        </a>
       </div>
       <style jsx>{styles}</style>
     </section>

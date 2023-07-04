@@ -5,7 +5,7 @@ import {ToastContainer} from 'react-toastify'
 
 import css from 'styled-jsx/css'
 
-import LogoTextIcon from 'data-base64:~assets/images/text-logo.svg'
+import LogoTextIcon from 'data-base64:~assets/images/logo.png'
 
 import useConfig from '@/hooks/use-config'
 import {withAIContext} from '@/components/with-ai-context'
@@ -117,10 +117,11 @@ export default withAIContext(function Options() {
           </Tabs>
         </main>
         <footer>
-          <span>{gettext('Webpilot is open source')}</span>
+          <span><a href='https://github.com/autoai-org/openwebpilot'>Limmat</a> is an open source fork of </span>
           <a href="https://github.com/Fluentify-IO/Fluentify" target="_blank" rel="noreferrer">
-            {gettext('Star on Github')}
+            Web Pilot
           </a>
+          Compute service provided by <a href="https://ocf.autoai.org/" target="_blank" rel="noreferrer">Open Compute Framework</a>
         </footer>
       </section>
 
